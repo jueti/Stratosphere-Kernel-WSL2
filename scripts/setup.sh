@@ -66,7 +66,7 @@ SKIP_DOWNLOAD=${SKIP_DOWNLOAD:-NO}
 
 if [ "$SKIP_DOWNLOAD" = "NO" ]; then
   CURL_UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
-  VERSION_BRANCH=$(curl -s https://xanmod.org/ -A "$CURL_UA" | sed -n "/$BRANCH/{n;n;s/.*<td>\([0-9]\+\.[0-9]\+\)<\/td>.*/\1/p}")
+  VERSION_BRANCH=$(curl -s https://www.kernel.org/finger_banner | grep 'latest stable version' | awk '{print $NF}' | sed 's/\([0-9]*\.[0-9]*\).*/\1/')
   XANMOD_REPO="https://gitlab.com/xanmod/linux.git"
   echo "Fetching Xanmod $BRANCH($VERSION_BRANCH) source..."
   git clone $XANMOD_REPO -b $VERSION_BRANCH --depth 1 linux
